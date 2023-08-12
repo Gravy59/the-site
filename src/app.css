@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		@apply h-full antialiased scroll-smooth leading-auto;
+		text-rendering: optimizeLegibility;
+	}
+
+	body {
+		@apply min-h-full flex flex-col bg-white text-zinc-900;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	div,
+	p {
+		@apply leading-auto;
+	}
+}
