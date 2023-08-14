@@ -17,10 +17,12 @@
 	"devDependencies": {
 		"@fontsource-variable/inter": "^5.0.8",
 		"@playwright/test": "^1.28.1",
+		"@prisma/client": "^5.1.1",
 		"@radix-ui/colors": "^2.0.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@tailwindcss/forms": "^0.5.4",
+		"@tailwindcss/typography": "^0.5.9",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -35,6 +37,7 @@
 		"svelte-check": "^3.4.3",
 		"tailwind-variants": "^0.1.13",
 		"tailwindcss": "^3.3.3",
+		"tailwindcss-animate": "^1.0.6",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2",
@@ -42,6 +45,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"pocketbase": "^0.16.0"
+		"@lucia-auth/adapter-prisma": "^3.0.1",
+		"lucia": "^2.3.0",
+		"prisma": "^5.1.1",
+		"svelte-markdown": "^0.3.0"
 	}
 }

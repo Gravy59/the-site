@@ -1,9 +1,7 @@
 <script lang="ts">
-	import User from '$lib/User.svelte';
-	import { pbStore } from '$lib/pocketbase';
+	import { page } from '$app/stores';
 	import '../app.css';
 	import '@fontsource-variable/inter';
-	pbStore.set('http://127.0.0.1:8090');
 </script>
 
 <header class="sticky inset-x-0 top-0 z-50 w-full p-4 text-sm border-b bg-zinc-50">
@@ -18,29 +16,34 @@
 					>Home</a
 				>
 			</li>
-			<User>
+			{#if $page.data.session}
 				<li>
 					<a
 						href="/profile"
 						class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white">Profile</a
 					>
 				</li>
-				<svelte:fragment slot="signedout">
-					<li>
-						<a
-							href="/join"
-							class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white">Join</a
-						>
-					</li>
-					<li>
-						<a
-							href="/enter"
-							class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white"
-							>Log in</a
-						>
-					</li>
-				</svelte:fragment>
-			</User>
+				<li>
+					<a
+						href="/logout"
+						data-sveltekit-preload-data="off"
+						class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white">Log out</a
+					>
+				</li>
+			{:else}
+				<li>
+					<a
+						href="/join"
+						class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white">Join</a
+					>
+				</li>
+				<li>
+					<a
+						href="/enter"
+						class="px-2 py-1 font-semibold rounded-md hover:bg-zinc-800 hover:text-white">Log in</a
+					>
+				</li>
+			{/if}
 		</ul>
 	</nav>
 </header>

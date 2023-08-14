@@ -1,8 +1,19 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { prisma } from '$lib/db';
 
-export const load = (({ locals }) => {
-	if (!locals.pb.authStore.isValid) {
-		throw redirect(303, '/enter?origin=profile');
-	}
-}) satisfies PageServerLoad;
+export const load: PageServerLoad = async ({ locals }) => {
+	const session = await locals.auth.validate();
+	if (!session) throw redirect(302, '/enter');
+	console.info(session.user.userId);
+	const posts = prisma.post.findMany({
+		where: {
+			authorId: session.user.userId
+		}
+	});
+	return {
+		userId: session.user.userId,
+		username: session.user.username,
+		posts
+	};
+};
