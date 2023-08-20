@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ params }) => {
 				body: true,
 				createdAt: true,
 				updatedAt: true,
+				lead: true,
 				author: {
 					select: { id: true, username: true }
 				}

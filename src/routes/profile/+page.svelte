@@ -8,22 +8,22 @@
 	}
 </script>
 
-<section class="container px-4 mx-auto lg:max-w-6xl">
-	<h1 class="text-4xl mt-5 mb-2.5 font-semibold tracking-tight">
+<section class="container mx-auto px-4 lg:max-w-6xl">
+	<h1 class="text-4xl font-semibold tracking-tight">
 		Welcome, {$page.data.username}
 	</h1>
 </section>
-<section class="container px-4 mx-auto lg:max-w-6xl">
-	<h1 class="text-4xl mt-5 mb-2.5 font-semibold tracking-tight">Posts</h1>
+<section class="container mx-auto px-4 lg:max-w-6xl">
+	<h1 class="text-4xl font-semibold tracking-tight">Posts</h1>
 	{#if $page.data.posts.length > 0}
-		<ul class="rounded shadow-sm mb-5">
+		<ul class="mb-5 rounded shadow-sm">
 			{#each $page.data.posts as post}
 				<li
-					class="text-zinc-600 first:rounded-t last:rounded-b last:mb-0 hover:bg-zinc-100 relative block py-2.5 px-4 -mb-px bg-white border border-zinc-300"
+					class="relative -mb-px block border border-zinc-300 bg-white px-4 py-2.5 text-zinc-600 first:rounded-t last:mb-0 last:rounded-b hover:bg-zinc-100"
 				>
 					<a href={`/posts/${post.id}`}
-						><h4 class="text-lg font-semibold leading-auto mb-1.5">{post.title}</h4>
-						<p class="leading-auto line-clamp-2">{post.body}</p></a
+						><h4 class="leading-base my-0 text-lg font-semibold">{post.title}</h4>
+						<p class="leading-base line-clamp-2">{post.body}</p></a
 					>
 				</li>
 			{/each}
@@ -36,14 +36,14 @@
 	</div>
 </section>
 {#if searchParams.get('notice') && noticeOpen}
-	<div class="fixed px-4 bottom-20 inset-x-0 z-20">
+	<div class="fixed inset-x-0 bottom-20 z-20 px-4">
 		<div
-			class="mx-auto relative text-sm font-medium border p-4 lg:max-w-6xl animate-in duration-1000 zoom-in border-blue-300 bg-repeat-x [text-shadow:0_1px_0_theme(colors.white/0.2)] shadow-sm text-cyan-700 bg-blue-100 rounded bg-gradient-to-b from-blue-100 to-sky-300"
+			class="relative mx-auto rounded border border-blue-300 bg-blue-100 bg-gradient-to-b from-blue-100 to-sky-300 bg-repeat-x p-4 text-sm font-medium text-cyan-700 shadow-sm duration-1000 animate-in zoom-in [text-shadow:0_1px_0_theme(colors.white/0.2)] lg:max-w-6xl"
 		>
 			<span>{searchParams.get('notice')}</span>
 			<button
 				on:click={closeNotice}
-				class="absolute right-4 inset-y-0 flex items-center justify-center"
+				class="absolute inset-y-0 right-4 flex items-center justify-center"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@
 					viewBox="0 0 24 24"
 					stroke-width="1.5"
 					stroke="currentColor"
-					class="w-6 h-6"
+					class="h-6 w-6"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>

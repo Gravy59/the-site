@@ -5,9 +5,9 @@
 	export let data: PageData;
 </script>
 
-<article class="container mx-auto px-4 lg:max-w-6xl text-sm leading-auto">
+<article class="leading-base container mx-auto px-4 text-base lg:max-w-6xl">
 	<h1 class={heading({ tight: true, size: 1 })}>{data.article.title}</h1>
-	<p class="mb-5 flex items-center gap-x-2 text-base leading-auto md:text-xl">
+	<p class="leading-base mb-5 flex items-center gap-x-2 text-lg md:text-xl">
 		<svg xmlns="http://www.w3.org/2000/svg" width="0.84em" height="1em" viewBox="0 0 1280 1536"
 			><path
 				fill="currentColor"
@@ -17,7 +17,7 @@
 		<span>by {data.article.author.username}</span>
 	</p>
 	<hr class="my-5" />
-	<p class="flex gap-x-2 items-center">
+	<p class="flex items-center gap-x-2">
 		<svg xmlns="http://www.w3.org/2000/svg" width="0.93em" height="1em" viewBox="0 0 1664 1792"
 			><path
 				fill="currentColor"
@@ -36,7 +36,12 @@
 	</p>
 	<hr class="my-5" />
 	<hr class="my-5" />
-	<div class="prose prose-sm">
+	<div class="typography">
+		{#if data.article.lead}
+			<p class="lead">
+				{data.article.lead}
+			</p>
+		{/if}
 		<SvelteMarkdown source={data.article.body} />
 	</div>
 </article>

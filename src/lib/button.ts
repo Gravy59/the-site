@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const button = tv({
 	base: [
-		'relative isolate inline-flex text-sm text-white [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
+		'relative isolate inline-flex items-center justify-center text-base text-white [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
 		'after:shadow-[shadow:inset_0_1px_0_theme(colors.white/0.15),theme(boxShadow.DEFAULT)]',
 		'border border-transparent',
 		'before:absolute before:-inset-px before:-z-10 before:rounded-md before:bg-[color-mix(in_srgb,var(--button-bg),black_14%)]',
@@ -22,8 +22,8 @@ export const button = tv({
 		size: {
 			lg: 'px-[calc(theme(spacing.4)-1px)] py-[calc(theme(spacing[2.5])-1px)] text-lg leading-snug before:rounded-md after:rounded-[calc(theme(borderRadius.md)-1px)]',
 			default:
-				'leading-base px-[calc(theme(spacing.3)-1px)] py-[calc(theme(spacing.2)-1px)] before:rounded after:rounded-[calc(theme(borderRadius.DEFAULT)-1px)]',
-			sm: 'px-[calc(theme(spacing[2.5])-1px)] py-[calc(theme(spacing[1.5])-1px)] text-xs/normal before:rounded-[0.1875rem] after:rounded-[calc(0.1875rem-1px)]'
+				'px-[calc(theme(spacing.3)-1px)] py-[calc(theme(spacing.2)-1px)] leading-base before:rounded after:rounded-[calc(theme(borderRadius.DEFAULT)-1px)]',
+			sm: 'px-[calc(theme(spacing[2.5])-1px)] py-[calc(theme(spacing[1.5])-1px)] text-sm/normal before:rounded-[0.1875rem] after:rounded-[calc(0.1875rem-1px)]'
 		}
 	},
 

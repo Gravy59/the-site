@@ -1,7 +1,5 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
-import typography from '@tailwindcss/typography';
-import forms from '@tailwindcss/forms';
 import animate from 'tailwindcss-animate';
 
 const leadingBase = (20 / 14).toFixed(9);
@@ -9,6 +7,21 @@ const leadingBase = (20 / 14).toFixed(9);
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
+		fontSize: {
+			sm: ['0.75rem', { lineHeight: '1rem' }],
+			base: ['0.875rem', { lineHeight: String(leadingBase) }],
+			lg: ['1rem', { lineHeight: '1.5' }],
+			xl: ['1.125rem', { lineHeight: '1.75rem' }],
+			'2xl': ['1.25rem', { lineHeight: '1.75rem' }],
+			'3xl': ['1.5rem', { lineHeight: '2rem' }],
+			'4xl': ['1.875rem', { lineHeight: '2.25rem' }],
+			'5xl': ['2.25rem', { lineHeight: '2.5rem' }],
+			'6xl': ['3rem', { lineHeight: '1' }],
+			'7xl': ['3.75rem', { lineHeight: '1' }],
+			'8xl': ['4.5rem', { lineHeight: '1' }],
+			'9xl': ['6rem', { lineHeight: '1' }],
+			'10xl': ['8rem', { lineHeight: '1' }]
+		},
 		extend: {
 			borderColor: ({ theme }) => ({
 				...theme('colors'),
@@ -20,6 +33,9 @@ export default {
 			lineHeight: {
 				auto: 'calc(4px + 2ex)',
 				base: leadingBase
+			},
+			spacing: {
+				'8.5': '2.125rem'
 			},
 			animation: {
 				'progress-bar-stripes': 'progress-bar-stripes 2s linear infinite'
@@ -33,61 +49,8 @@ export default {
 						backgroundPosition: '0 0'
 					}
 				}
-			},
-			typography: ({ theme }) => ({
-				sm: {
-					css: {
-						lineHeight: theme('lineHeight.auto'),
-						h1: {
-							fontSize: theme('fontSize.4xl[0]'),
-							lineHeight: theme('lineHeight.auto'),
-							fontWeight: theme('fontWeight.semibold'),
-							marginTop: theme('spacing.5'),
-							marginBottom: theme('spacing[2.5]')
-						},
-						h2: {
-							fontSize: theme('fontSize.3xl[0]'),
-							lineHeight: theme('lineHeight.auto'),
-							fontWeight: theme('fontWeight.semibold'),
-							marginTop: theme('spacing.5'),
-							marginBottom: theme('spacing[2.5]')
-						},
-						h3: {
-							fontSize: theme('fontSize.2xl[0]'),
-							lineHeight: theme('lineHeight.auto'),
-							fontWeight: theme('fontWeight.semibold'),
-							marginTop: theme('spacing.5'),
-							marginBottom: theme('spacing[2.5]')
-						},
-						p: {
-							marginBottom: theme('spacing[2.5]'),
-							lineHeight: theme('lineHeight.auto')
-						},
-						'ul, ol': {
-							marginBottom: theme('spacing[2.5]'),
-							marginTop: theme('spacing.0'),
-							paddingLeft: theme('spacing.10'),
-							li: {
-								margin: theme('spacing.0'),
-								padding: theme('spacing.0')
-							}
-						},
-						'ul ul': {
-							listStyleType: 'circle'
-						},
-						'ul ul ul': {
-							listStyleType: 'square'
-						},
-
-						'::marker': {
-							fontVariantNumeric: 'tabular-nums'
-						},
-						'--tw-prose-bullets': theme('colors.zinc[800]'),
-						'--tw-prose-counters': theme('colors.zinc[800]')
-					}
-				}
-			})
+			}
 		}
 	},
-	plugins: [animate, forms, typography]
+	plugins: [animate]
 } satisfies Config;

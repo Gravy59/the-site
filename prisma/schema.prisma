@@ -41,6 +41,7 @@ model Key {
 model Post {
   id        String   @id @default(cuid())
   title     String   @unique
+  lead      String?
   body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

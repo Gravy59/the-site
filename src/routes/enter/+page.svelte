@@ -3,20 +3,21 @@
 	import { enhance } from '$app/forms';
 
 	import type { ActionData } from './$types';
+	import { input } from '$lib/forms';
 
 	export let form: ActionData;
 </script>
 
-<div class="container px-4 mx-auto lg:max-w-6xl">
-	<form use:enhance method="POST" class="max-w-xs p-4 mx-auto space-y-2">
+<div class="container mx-auto px-4 lg:max-w-6xl">
+	<form use:enhance method="POST" class="mx-auto max-w-xs space-y-2 p-4">
 		{#if form?.message}
-			<p class="text-red-500 text-sm font-medium">{form.message}</p>
+			<p class="text-base font-medium text-red-500">{form.message}</p>
 		{/if}
-		<h2 class="text-3xl mt-5 mb-2.5 font-bold tracking-tight">Log in</h2>
+		<h2 class="text-3xl font-bold tracking-tight">Log in</h2>
 		<div class="-space-y-px">
 			<input
 				required
-				class="relative block w-full transition rounded-none rounded-t focus:z-10 focus:shadow-[0_0_8px] focus:shadow-blue-400/60 focus:ring-1 focus:ring-inset focus:border-blue-400 focus:outline-none focus:ring-black/5 border-zinc-300 placeholder:text-zinc-400 text-zinc-600"
+				class={input({ radius: 'children', class: 'text-lg' })}
 				placeholder="you"
 				type="text"
 				name="username"
@@ -24,7 +25,7 @@
 
 			<input
 				required
-				class="relative block w-full transition rounded-none rounded-b focus:z-10 focus:shadow-[0_0_8px] focus:shadow-blue-400/60 focus:ring-1 focus:ring-inset focus:border-blue-400 focus:outline-none focus:ring-black/5 border-zinc-300 placeholder:text-zinc-400 text-zinc-600"
+				class={input({ radius: 'children', class: 'text-lg' })}
 				placeholder="•••••••••"
 				type="password"
 				name="password"

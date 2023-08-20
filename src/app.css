@@ -4,22 +4,125 @@
 
 @layer base {
 	html {
-		@apply h-full antialiased scroll-smooth leading-auto;
+		@apply h-full scroll-smooth leading-base antialiased;
 		text-rendering: optimizeLegibility;
 	}
 
 	body {
-		@apply min-h-full flex flex-col bg-white text-zinc-900;
+		@apply flex min-h-full flex-col bg-white text-zinc-900;
 	}
 
+	.h1,
+	.h2,
+	.h3,
 	h1,
 	h2,
-	h3,
+	h3 {
+		@apply mb-2.5 mt-5;
+	}
+
+	.h4,
+	.h5,
+	.h6,
 	h4,
 	h5,
-	h6,
-	div,
-	p {
-		@apply leading-auto;
+	h6 {
+		@apply my-2.5;
+	}
+}
+
+@layer base {
+	.typography {
+		@apply text-base/base;
+		h1 {
+			@apply text-5xl font-semibold;
+		}
+		h2 {
+			@apply text-4xl font-semibold;
+		}
+		h3 {
+			@apply text-3xl font-semibold;
+		}
+		h4 {
+			@apply text-xl font-semibold;
+		}
+		h5 {
+			@apply text-base font-semibold;
+		}
+		h6 {
+			@apply text-sm font-semibold;
+		}
+		p {
+			@apply mb-2.5;
+		}
+		code {
+			@apply rounded bg-zinc-100 px-1 py-0.5 text-[90%] text-pink-700;
+		}
+		pre {
+			@apply mb-2.5 block break-words break-all rounded border border-zinc-300 bg-zinc-100 p-2.5 text-[90%] leading-base text-zinc-800;
+			code {
+				@apply text-zinc-800;
+			}
+		}
+		ol,
+		ul {
+			@apply mb-2.5 mt-0;
+		}
+		ol {
+			@apply block list-decimal ps-10;
+		}
+		ul {
+			@apply block list-disc ps-10;
+			ul {
+				list-style-type: circle;
+				ul {
+					list-style-type: square;
+				}
+			}
+		}
+		table {
+			@apply mb-5 table w-full max-w-full border-collapse border-spacing-0 border-zinc-500 bg-transparent;
+			thead {
+				@apply table-header-group border-inherit align-middle;
+				tr {
+					th {
+						@apply border-b-2 border-t-0 border-zinc-300 align-bottom;
+					}
+				}
+			}
+			tr {
+				@apply table-row border-inherit;
+			}
+			th {
+				@apply border-t border-zinc-300 p-2 text-left align-top font-semibold leading-base;
+			}
+			tbody {
+				@apply table-row-group border-inherit align-middle;
+			}
+			td {
+				@apply border-t border-zinc-300 p-2 text-left align-top leading-base;
+			}
+		}
+		figure {
+			@apply mb-4 inline-block;
+			& > :first-child {
+				@apply mb-2 rounded;
+			}
+		}
+		figcaption {
+			@apply text-base text-zinc-600;
+		}
+		hr {
+			@apply my-5;
+		}
+		blockquote {
+			@apply mb-5 border-l-4 border-zinc-200 px-5 py-2.5 text-xl;
+			p:last-child {
+				@apply mb-0;
+			}
+		}
+		.lead {
+			@apply mb-5 text-lg font-light leading-6 md:text-2xl;
+		}
 	}
 }

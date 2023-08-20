@@ -4,14 +4,16 @@ import { fail, redirect } from '@sveltejs/kit';
 
 import type { PageServerLoad, Actions } from './$types';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ url, locals }) => {
+	const origin = url.searchParams.get('origin') ?? '/';
 	const session = await locals.auth.validate();
-	if (session) throw redirect(302, '/');
+	if (session) throw redirect(302, origin);
 	return {};
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, url }) => {
+		const origin = url.searchParams.get('origin') ?? '/';
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
@@ -52,6 +54,6 @@ export const actions: Actions = {
 		}
 		// redirect to
 		// make sure you don't throw inside a try/catch block!
-		throw redirect(302, '/');
+		throw redirect(302, origin);
 	}
 };
