@@ -4,6 +4,8 @@ import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
 import animate from 'tailwindcss-animate';
 
+const leadingBase = (20 / 14).toFixed(9);
+
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
@@ -16,7 +18,8 @@ export default {
 				sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans]
 			},
 			lineHeight: {
-				auto: 'calc(4px + 2ex)'
+				auto: 'calc(4px + 2ex)',
+				base: leadingBase
 			},
 			animation: {
 				'progress-bar-stripes': 'progress-bar-stripes 2s linear infinite'

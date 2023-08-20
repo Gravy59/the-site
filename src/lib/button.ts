@@ -1,25 +1,29 @@
 import { tv } from 'tailwind-variants';
 
 export const button = tv({
-	base: 'inline-flex items-center shadow-sm justify-center bg-gradient-to-b hover:[background-position:0_-15px] active:shadow-inner active:bg-none bg-repeat-x touch-manipulation border border-transparent select-none',
+	base: [
+		'relative isolate inline-flex text-sm text-white [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
+		'after:shadow-[shadow:inset_0_1px_0_theme(colors.white/0.15),theme(boxShadow.DEFAULT)]',
+		'border border-transparent',
+		'before:absolute before:-inset-px before:-z-10 before:rounded-md before:bg-[color-mix(in_srgb,var(--button-bg),black_14%)]',
+		'after:absolute after:inset-0 after:-z-10 after:bg-gradient-to-b after:from-[--button-bg] after:to-[color-mix(in_srgb,var(--button-bg),black_12%)]',
+		'after:hover:from-[color-mix(in_srgb,var(--button-bg),black_5%)] after:hover:to-[color-mix(in_srgb,var(--button-bg),black_17%)]',
+		'after:active:bg-[color-mix(in_srgb,var(--button-bg),black_12%)] after:active:bg-none after:active:shadow-[inset_0_3px_5px_theme(colors.black/0.125z)]'
+	],
 	variants: {
 		color: {
-			default:
-				'text-zinc-800 bg-white border-zinc-300 from-white to-zinc-200 hover:border-zinc-400 hover:bg-zinc-200 active:border-zinc-300 active:bg-zinc-200 [text-shadow:0_1px_0_theme(colors.white)]',
-			primary:
-				'text-white bg-cyan-600 border-cyan-800 from-cyan-600 to-cyan-800 hover:border-cyan-900 hover:bg-cyan-800 active:border-cyan-800 active:bg-cyan-900 [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
-			success:
-				'text-white bg-green-400 border-green-600 from-green-400 to-green-600 hover:border-green-700 hover:bg-green-600 active:border-green-700 active:bg-green-600 [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
-			info: 'text-white bg-blue-400 border-cyan-500 from-blue-300 to-sky-500 hover:border-cyan-600 hover:bg-sky-500 active:border-cyan-500 active:bg-sky-500 [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
-			warning:
-				'text-white bg-orange-400 border-amber-600 from-orange-400 to-amber-600 hover:border-amber-700 hover:bg-amber-600 active:border-amber-700 active:bg-amber-700 [text-shadow:0_-1px_0_theme(colors.black/0.2)]',
-			danger:
-				'text-white bg-red-400 border-red-600 from-red-400 to-red-600 hover:border-red-700 hover:bg-red-600 active:border-red-700 active:bg-red-700 [text-shadow:0_-1px_0_theme(colors.black/0.2)]'
+			default: 'text-zinc-950 [--button-bg:white] [text-shadow:0_1px_0_theme(colors.white)]',
+			primary: '[--button-bg:theme(colors.cyan.600)]',
+			success: '[--button-bg:theme(colors.green.500)]',
+			info: '[--button-bg:theme(colors.sky.400)]',
+			warning: '[--button-bg:theme(colors.orange.400)]',
+			danger: '[--button-bg:theme(colors.red.500)]'
 		},
 		size: {
-			lg: 'py-2.5 px-4 text-lg/snug rounded-md',
-			default: 'py-1.5 px-3 text-sm/6 rounded',
-			sm: 'py-1.5 px-2.5 text-xs/normal rounded-[0.1875rem]'
+			lg: 'px-[calc(theme(spacing.4)-1px)] py-[calc(theme(spacing[2.5])-1px)] text-lg leading-snug before:rounded-md after:rounded-[calc(theme(borderRadius.md)-1px)]',
+			default:
+				'leading-base px-[calc(theme(spacing.3)-1px)] py-[calc(theme(spacing.2)-1px)] before:rounded after:rounded-[calc(theme(borderRadius.DEFAULT)-1px)]',
+			sm: 'px-[calc(theme(spacing[2.5])-1px)] py-[calc(theme(spacing[1.5])-1px)] text-xs/normal before:rounded-[0.1875rem] after:rounded-[calc(0.1875rem-1px)]'
 		}
 	},
 
