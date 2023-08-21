@@ -12,7 +12,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"test:integration": "playwright test",
-		"test:unit": "vitest"
+		"test:unit": "vitest",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@fontsource-variable/inter": "^5.0.8",
@@ -27,6 +28,8 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
 		"fontaine": "^0.4.0",
+		"husky": "^8.0.0",
+		"lint-staged": "^14.0.1",
 		"postcss": "^8.4.27",
 		"prettier": "^3.0.2",
 		"prettier-plugin-svelte": "^3.0.3",
@@ -47,5 +50,11 @@
 		"lucia": "^2.3.0",
 		"prisma": "^5.1.1",
 		"svelte-markdown": "^0.3.0"
+	},
+	"lint-staged": {
+		"*.{js,cjs,mjs,ts,svelte,html}": [
+			"eslint --fix",
+			"prettier --write"
+		]
 	}
 }
