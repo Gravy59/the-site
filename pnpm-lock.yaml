@@ -23,9 +23,15 @@ dependencies:
   prisma:
     specifier: ^5.2.0
     version: 5.2.0
-  svelte-markdown:
-    specifier: ^0.3.0
-    version: 0.3.0(svelte@4.2.0)
+  svelte-headlessui:
+    specifier: ^0.0.25
+    version: 0.0.25(svelte@4.2.0)
+  svelte-tiptap:
+    specifier: ^1.1.2
+    version: 1.1.2(@tiptap/core@2.1.7)(@tiptap/extension-bubble-menu@2.1.7)(@tiptap/extension-floating-menu@2.1.7)(@tiptap/pm@2.1.7)(svelte@4.2.0)
+  svelte-transition:
+    specifier: ^0.0.10
+    version: 0.0.10(svelte@4.2.0)
 
 devDependencies:
   '@fontsource-variable/inter':
@@ -109,6 +115,9 @@ devDependencies:
   vitest:
     specifier: ^0.34.3
     version: 0.34.3
+  zod:
+    specifier: ^3.22.2
+    version: 3.22.2
 
 packages:
 
@@ -480,6 +489,10 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
   /@prisma/client@5.2.0(prisma@5.2.0):
     resolution: {integrity: sha512-AiTjJwR4J5Rh6Z/9ZKrBBLel3/5DzUNntMohOy7yObVnVoTNVFi2kvpLZlFuKO50d7yDspOtW6XBpiAd0BVXbQ==}
     engines: {node: '>=16.13'}
@@ -634,6 +647,17 @@ packages:
       '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
     dev: false
 
+  /@tiptap/extension-bubble-menu@2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7):
+    resolution: {integrity: sha512-VcwwUgiG17TEDZda1JBbyKCHLIBTu8B2OAzYrnd4ZqeRs5KTVAB279o/TVjsLVgEfC+c7IWwhhaPPMoXn/lJ3g==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/pm': 2.1.7
+      tippy.js: 6.3.7
+    dev: false
+
   /@tiptap/extension-bullet-list@2.1.7(@tiptap/core@2.1.7):
     resolution: {integrity: sha512-BReix1wkGNH12DSWGnWPKNu4do92Avh98aLkRS1o1V1Y49/+YGMYtfBXB9obq40o0WqKvk4MoM+rhKbfEc44Gg==}
     peerDependencies:
@@ -676,6 +700,17 @@ packages:
     dependencies:
       '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
       '@tiptap/pm': 2.1.7
+    dev: false
+
+  /@tiptap/extension-floating-menu@2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7):
+    resolution: {integrity: sha512-K0bO7JKHAvgLM5MkhNgoYcD6SB0Z2tNIFhZHs5SCTuhg7dwduMSM3pC6QBrJGUk99DGsKuMPYQn3c2oG7MLbyQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/pm': 2.1.7
+      tippy.js: 6.3.7
     dev: false
 
   /@tiptap/extension-gapcursor@2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7):
@@ -841,10 +876,6 @@ packages:
   /@types/json-schema@7.0.12:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
     dev: true
-
-  /@types/marked@4.3.1:
-    resolution: {integrity: sha512-vSSbKZFbNktrQ15v7o1EaH78EbWV+sPQbPjHG+Cp8CaNcPFUEfjZ0Iml/V0bFDwsTlYe8o6XC5Hfdp91cqPV2g==}
-    dev: false
 
   /@types/node@20.4.10:
     resolution: {integrity: sha512-vwzFiiy8Rn6E0MtA13/Cxxgpan/N6UeNYR9oUu6kuJWxu6zCk98trcDp8CBhbtaeuq9SykCmXkFr2lWLoPcvLg==}
@@ -2161,12 +2192,6 @@ packages:
       uc.micro: 1.0.6
     dev: false
 
-  /marked@4.3.0:
-    resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
-    engines: {node: '>= 12'}
-    hasBin: true
-    dev: false
-
   /mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
@@ -3131,6 +3156,14 @@ packages:
       svelte: 4.2.0
     dev: true
 
+  /svelte-headlessui@0.0.25(svelte@4.2.0):
+    resolution: {integrity: sha512-jJ/XX+v9IUJQShbvusudctyi5RM3z/hfpm04Bv9JkR3Nd2hyO1rWP4uGpKAEU+ltDX2/sM4yOwcTwql+wURkTA==}
+    dependencies:
+      svelte-transition: 0.0.10(svelte@4.2.0)
+    transitivePeerDependencies:
+      - svelte
+    dev: false
+
   /svelte-hmr@0.15.3(svelte@4.2.0):
     resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -3139,16 +3172,6 @@ packages:
     dependencies:
       svelte: 4.2.0
     dev: true
-
-  /svelte-markdown@0.3.0(svelte@4.2.0):
-    resolution: {integrity: sha512-cFcHYZlykgCMxRp7fqPlaAGadp5dRiYjzpKTnf/yHMJo2ToUXwtL5h5krCVy03CC7fv096g4mD9SOTYjyOF5UA==}
-    peerDependencies:
-      svelte: ^4.0.0
-    dependencies:
-      '@types/marked': 4.3.1
-      marked: 4.3.0
-      svelte: 4.2.0
-    dev: false
 
   /svelte-preprocess@5.0.4(postcss@8.4.28)(svelte@4.2.0)(typescript@5.1.6):
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}
@@ -3197,6 +3220,30 @@ packages:
       svelte: 4.2.0
       typescript: 5.1.6
     dev: true
+
+  /svelte-tiptap@1.1.2(@tiptap/core@2.1.7)(@tiptap/extension-bubble-menu@2.1.7)(@tiptap/extension-floating-menu@2.1.7)(@tiptap/pm@2.1.7)(svelte@4.2.0):
+    resolution: {integrity: sha512-6OaQFOQEke6V6qioPzEQJWJAoB9+jF8nLo0Y9Gzbw4XQnfOqG9WOiXzPH+3cvATCHODgFt3F7JCbWMEUgGC/5Q==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.3
+      '@tiptap/extension-bubble-menu': ^2.0.3
+      '@tiptap/extension-floating-menu': ^2.0.3
+      '@tiptap/pm': ^2.0.3
+      svelte: ^4.0.1
+    dependencies:
+      '@tiptap/core': 2.1.7(@tiptap/pm@2.1.7)
+      '@tiptap/extension-bubble-menu': 2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)
+      '@tiptap/extension-floating-menu': 2.1.7(@tiptap/core@2.1.7)(@tiptap/pm@2.1.7)
+      '@tiptap/pm': 2.1.7
+      svelte: 4.2.0
+    dev: false
+
+  /svelte-transition@0.0.10(svelte@4.2.0):
+    resolution: {integrity: sha512-BN8XDA7dKyuh+Lmdn3vxCzJd3M7L4BLdRziIAJew2AiBFMcrJJg8srEMYYoTCOLtYJ2Oqlv3+3/K5b6uHM8LSg==}
+    peerDependencies:
+      svelte: ^3.59.1 || ^4.0.0
+    dependencies:
+      svelte: 4.2.0
+    dev: false
 
   /svelte@4.2.0:
     resolution: {integrity: sha512-kVsdPjDbLrv74SmLSUzAsBGquMs4MPgWGkGLpH+PjOYnFOziAvENVzgJmyOCV2gntxE32aNm8/sqNKD6LbIpeQ==}
@@ -3308,6 +3355,12 @@ packages:
     resolution: {integrity: sha512-XPJL2uSzcOyBMky6OFrusqWlzfFrXtE0hPuMgW8A2HmaqrPo4ZQHRN/V0QXN3FSjKxpsbRrFc5LI7KOwBsT1/w==}
     engines: {node: '>=14.0.0'}
     dev: true
+
+  /tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.8
+    dev: false
 
   /to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -3648,4 +3701,8 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+    dev: true
+
+  /zod@3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
     dev: true

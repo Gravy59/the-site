@@ -1,11 +1,29 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { button } from '$lib/button';
+	import { heading } from '$lib/headings';
+	import { createDialog } from 'svelte-headlessui';
+	import { applyAction, enhance } from '$app/forms';
+	import Transition from 'svelte-transition';
+	import Alert from '$lib/alert.svelte';
+	import type { ActionData } from './$types';
+
 	const searchParams = $page.url.searchParams;
-	let noticeOpen = true;
-	function closeNotice() {
-		noticeOpen = false;
+
+	let noticeDismissed: boolean;
+
+	const notice = searchParams.get('notice');
+
+	let postIDToDelete = '';
+
+	function confirmPostDelete(id: string) {
+		deleteDialog.open();
+		postIDToDelete = id;
 	}
+
+	const deleteDialog = createDialog({ label: 'Are you sure you want to delete this post?' });
+
+	export let form: ActionData;
 </script>
 
 <section class="container mx-auto px-4 lg:max-w-6xl">
@@ -19,11 +37,25 @@
 		<ul class="mb-5 rounded shadow-sm">
 			{#each $page.data.posts as post}
 				<li
-					class="relative -mb-px block border border-zinc-300 bg-white px-4 py-2.5 text-zinc-600 first:rounded-t last:mb-0 last:rounded-b hover:bg-zinc-100"
+					class="relative -mb-px flex justify-between border border-zinc-300 bg-white px-4 py-2.5 text-zinc-600 first:rounded-t last:mb-0 last:rounded-b hover:bg-zinc-100"
 				>
 					<a href={`/posts/${post.id}`}
-						><h4 class="leading-base my-0 text-lg font-semibold">{post.title}</h4>
-						<p class="leading-base line-clamp-2">{post.body}</p></a
+						><h4 class="my-0 text-lg font-semibold leading-base">{post.title}</h4>
+						{#if post.lead}<p class="line-clamp-2 leading-base">{post.lead}</p>{/if}</a
+					>
+					<button
+						on:click={() => confirmPostDelete(post.id)}
+						class={button({ size: 'sm', color: 'danger', class: 'h-7 w-7 self-start' })}
+						><span class="sr-only">Delete post</span><svg
+							aria-hidden
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-4 w-4 shrink-0"
+							fill="currentColor"
+							viewBox="0 0 256 256"
+							><path
+								d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"
+							></path></svg
+						></button
 					>
 				</li>
 			{/each}
@@ -35,30 +67,87 @@
 		<a href="/posts/create" class={button()}>Create Post &raquo;</a>
 	</div>
 </section>
-{#if searchParams.get('notice') && noticeOpen}
+
+{#if notice && !noticeDismissed}
 	<div class="fixed inset-x-0 bottom-20 z-20 px-4">
-		<div
-			class="relative mx-auto rounded border border-blue-300 bg-blue-100 bg-gradient-to-b from-blue-100 to-sky-300 bg-repeat-x p-4 text-sm font-medium text-cyan-700 shadow-sm duration-1000 animate-in zoom-in [text-shadow:0_1px_0_theme(colors.white/0.2)] lg:max-w-6xl"
-		>
-			<span>{searchParams.get('notice')}</span>
-			<button
-				on:click={closeNotice}
-				class="absolute inset-y-0 right-4 flex items-center justify-center"
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="h-6 w-6"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
-		</div>
+		<Alert dismissable fadeIn message={notice} bind:dismissed={noticeDismissed} />
 	</div>
 {/if}
+
+{#if form?.message}
+	<div class="fixed inset-x-0 bottom-36 z-20 px-4">
+		<Alert color="error" message={form.message} />
+	</div>
+{/if}
+
+<div class="relative z-50">
+	<Transition show={$deleteDialog.expanded}>
+		<Transition
+			enter="linear duration-150"
+			enterFrom="opacity-0"
+			enterTo="opacity-100"
+			leave="linear duration-150"
+			leaveFrom="opacity-100"
+			leaveTo="opacity-0"
+		>
+			<div class="fixed inset-0 bg-black bg-opacity-50" />
+		</Transition>
+
+		<div class="fixed inset-0 overflow-y-auto">
+			<div class="flex min-h-full items-center justify-center p-4">
+				<Transition
+					enter="ease-out duration-300"
+					enterFrom="-translate-y-1/4 opacity-0"
+					enterTo="translate-y-0 opacity-100"
+					leave="ease-out duration-300"
+					leaveFrom="translate-y-0 opacity-100"
+					leaveTo="-translate-y-1/4 opacity-0"
+				>
+					<div
+						class="m-2.5 w-auto transform rounded-md border border-black/20 bg-white bg-clip-padding shadow-md md:mx-auto md:w-[37.5rem]"
+						use:deleteDialog.modal
+					>
+						<header class="flex items-center justify-between border-b border-zinc-200 p-4">
+							<h4 class={heading({ size: 2, class: 'm-0 text-xl' })}>Are you sure?</h4>
+							<button
+								class="text-2xl font-bold text-black opacity-20 [text-shadow:0_1px_0_theme(colors.white)]"
+								on:click={deleteDialog.close}
+								type="button"
+								><span class="sr-only">Close</span><span aria-hidden>&times;</span></button
+							>
+						</header>
+						<form
+							action="?/deletePost"
+							use:enhance={({ formData }) => {
+								formData.append('postId', postIDToDelete);
+								return async ({ result, update }) => {
+									await applyAction(result);
+									update();
+								};
+							}}
+							method="POST"
+						>
+							<div class="typography p-4">
+								<p>
+									This will delete your post <strong>permanantly</strong>.
+									<strong>You will not be able to recover this post once you delete it.</strong>
+								</p>
+							</div>
+							<footer class="border-t border-zinc-200 p-4 text-right">
+								<button type="reset" class={button()} on:click={deleteDialog.close}>Cancel</button>
+								<button
+									class={button({ color: 'danger' })}
+									type="submit"
+									on:click={deleteDialog.close}>Delete</button
+								>
+							</footer>
+						</form>
+					</div>
+				</Transition>
+			</div>
+		</div>
+	</Transition>
+</div>
 <!-- <section class="container px-4 mx-auto mt-8 lg:max-w-6xl">
 	<div
 		class="h-5 overflow-hidden bg-repeat-x rounded shadow-inner bg-gradient-to-b from-zinc-200 to-zinc-100 shadow-black/10"

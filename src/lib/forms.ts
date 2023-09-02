@@ -14,5 +14,10 @@ export const input = tv({
 });
 
 export const label = tv({
-	base: 'mb-1.5 inline-block max-w-full font-bold'
+	base: 'mb-1.5 inline-block max-w-full font-medium',
+	variants: {
+		required: {
+			true: 'after:text-red-500 after:content-["*"]'
+		}
+	}
 });

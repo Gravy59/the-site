@@ -1,7 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
-
 import type { PageServerLoad, Actions } from './$types';
 import { prisma } from '$lib/db';
+import { z } from 'zod';
+import { Prisma } from '@prisma/client';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth.validate();
@@ -11,39 +12,44 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
+		// Auth
 		const session = await locals.auth.validate();
-		if (!session)
-			return fail(401, {
-				message: 'Not signed in'
-			});
+		if (!session) return fail(401);
+		// Validation
 		const formData = await request.formData();
 		const title = formData.get('title');
+		const lead = formData.get('lead');
 		const body = formData.get('body');
-		// basic check
-		if (typeof title !== 'string' || title.length < 4 || title.length > 100) {
-			return fail(400, {
-				message: 'Invalid title (too long or too short)'
-			});
+
+		const createPostSchema = z.object({
+			title: z.string().min(3, 'Title is too short').max(100, 'Title is too long'),
+			lead: z.string().min(3, 'Lead is too short').max(50, 'Lead is too long').or(z.literal('')),
+			body: z.string().min(10, 'Body is too short').max(2500, 'Body is too long')
+		});
+
+		const validationResult = createPostSchema.safeParse({ title, lead, body });
+		if (!validationResult.success) {
+			return fail(400, { message: validationResult.error.message });
 		}
-		if (typeof body !== 'string' || body.length < 10 || body.length > 5000) {
-			return fail(400, {
-				message: 'Invalid body (too long or too short)'
-			});
-		}
+
 		try {
 			await prisma.post.create({
 				data: {
-					title,
-					body,
+					title: validationResult.data.title,
+					body: validationResult.data.body,
+					lead: validationResult.data.lead,
 					authorId: session.user.userId
 				}
 			});
 		} catch (e) {
+			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+				return fail(400, { message: 'Title is already taken' });
+			}
 			return fail(500, {
 				message: 'An unknown error occurred'
 			});
 		}
 
-		throw redirect(303, '/profile?notice=Post created!');
+		throw redirect(303, '/profile?notice=Post%20created!');
 	}
 };

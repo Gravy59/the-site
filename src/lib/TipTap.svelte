@@ -1,25 +1,22 @@
-<script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { Editor } from '@tiptap/core';
+<script script lang="ts">
+	import { onMount } from 'svelte';
+	import { createEditor, Editor, EditorContent } from 'svelte-tiptap';
 	import StarterKit from '@tiptap/starter-kit';
 	import { input } from './forms';
 	import { button } from './button';
 	import { createMenu } from 'svelte-headlessui';
+	import type { Readable } from 'svelte/store';
 
 	const sizeMenu = createMenu({ label: 'Font Size' });
 
 	let element: Element;
-	let editor: Editor;
+	let editor: Readable<Editor>;
 
 	onMount(() => {
-		editor = new Editor({
+		editor = createEditor({
 			element: element,
 			extensions: [StarterKit],
 			content: '<p>Hello World! 🌍️ </p>',
-			onTransaction: () => {
-				// force re-render so `editor.isActive` works as expected
-				editor = editor;
-			},
 			editorProps: {
 				attributes: {
 					class: input({ class: 'h-auto min-h-[4rem] typography' })
@@ -27,15 +24,9 @@
 			}
 		});
 	});
-
-	onDestroy(() => {
-		if (editor) {
-			editor.destroy();
-		}
-	});
 </script>
 
-{#if editor}
+{#if $editor}
 	<div class="mb-2 mt-4 flex items-center gap-x-2">
 		<div class="relative inline-block">
 			<button use:sizeMenu.button class={button({ size: 'sm' })}>
@@ -59,33 +50,33 @@
 				<li>
 					<button
 						class="w-full px-5 py-1 text-left leading-5 {$sizeMenu.active === 'Heading 1' ||
-						editor.isActive('heading', { level: 1 })
+						$editor.isActive('heading', { level: 1 })
 							? 'bg-sky-500 bg-gradient-to-b from-sky-600 to-sky-700 bg-repeat-x text-white'
 							: 'text-zinc-800'}"
 						use:sizeMenu.item
-						on:click={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+						on:click={() => $editor.chain().focus().toggleHeading({ level: 1 }).run()}
 						>Heading 1</button
 					>
 				</li>
 				<li>
 					<button
 						class="w-full px-5 py-1 text-left leading-5 {$sizeMenu.active === 'Heading 2' ||
-						editor.isActive('heading', { level: 2 })
+						$editor.isActive('heading', { level: 2 })
 							? 'bg-sky-500 bg-gradient-to-b from-sky-600 to-sky-700 bg-repeat-x text-white'
 							: 'text-zinc-800'}"
 						use:sizeMenu.item
-						on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+						on:click={() => $editor.chain().focus().toggleHeading({ level: 2 }).run()}
 						>Heading 2</button
 					>
 				</li>
 				<li>
 					<button
 						class="w-full px-5 py-1 text-left leading-5 {$sizeMenu.active === 'Body' ||
-						editor.isActive('paragraph')
+						$editor.isActive('paragraph')
 							? 'bg-sky-500 bg-gradient-to-b from-sky-600 to-sky-700 bg-repeat-x text-white'
 							: 'text-zinc-800'}"
 						use:sizeMenu.item
-						on:click={() => editor.chain().focus().setParagraph().run()}>Body</button
+						on:click={() => $editor.chain().focus().setParagraph().run()}>Body</button
 					>
 				</li>
 			</ul>
@@ -97,7 +88,7 @@
 					class:
 						'before:rounded-none after:rounded-none first:before:rounded-l-[0.1875rem] first:after:rounded-l-[calc(0.1875rem-1px)] last:before:rounded-r-[0.1875rem] last:after:rounded-r-[calc(0.1875rem-1px)]'
 				})}
-				on:click={() => editor.chain().toggleBold().run()}
+				on:click={() => $editor.chain().toggleBold().run()}
 				><span class="sr-only">Bold</span><svg
 					xmlns="http://www.w3.org/2000/svg"
 					aria-hidden
@@ -114,7 +105,7 @@
 					class:
 						'before:rounded-none after:rounded-none first:before:rounded-l-[0.1875rem] first:after:rounded-l-[calc(0.1875rem-1px)] last:before:rounded-r-[0.1875rem] last:after:rounded-r-[calc(0.1875rem-1px)]'
 				})}
-				on:click={() => editor.chain().toggleItalic().run()}
+				on:click={() => $editor.chain().toggleItalic().run()}
 			>
 				<span class="sr-only">Italic</span>
 				<svg
@@ -133,7 +124,7 @@
 					class:
 						'before:rounded-none after:rounded-none first:before:rounded-l-[0.1875rem] first:after:rounded-l-[calc(0.1875rem-1px)] last:before:rounded-r-[0.1875rem] last:after:rounded-r-[calc(0.1875rem-1px)]'
 				})}
-				on:click={() => editor.chain().toggleCode().run()}
+				on:click={() => $editor.chain().toggleCode().run()}
 			>
 				<span class="sr-only">Inline code</span>
 				<svg
@@ -151,7 +142,7 @@
 			class={button({
 				size: 'sm'
 			})}
-			on:click={() => editor.chain().toggleCodeBlock().run()}
+			on:click={() => $editor.chain().toggleCodeBlock().run()}
 		>
 			<span class="sr-only">Code block</span>
 			<svg
@@ -171,7 +162,7 @@
 					class:
 						'before:rounded-none after:rounded-none first:before:rounded-l-[0.1875rem] first:after:rounded-l-[calc(0.1875rem-1px)] last:before:rounded-r-[0.1875rem] last:after:rounded-r-[calc(0.1875rem-1px)]'
 				})}
-				on:click={() => editor.chain().toggleBulletList().run()}
+				on:click={() => $editor.chain().toggleBulletList().run()}
 				><span class="sr-only">Bullet list</span><svg
 					xmlns="http://www.w3.org/2000/svg"
 					aria-hidden
@@ -188,7 +179,7 @@
 					class:
 						'before:rounded-none after:rounded-none first:before:rounded-l-[0.1875rem] first:after:rounded-l-[calc(0.1875rem-1px)] last:before:rounded-r-[0.1875rem] last:after:rounded-r-[calc(0.1875rem-1px)]'
 				})}
-				on:click={() => editor.chain().toggleOrderedList().run()}
+				on:click={() => $editor.chain().toggleOrderedList().run()}
 			>
 				<span class="sr-only">Ordered list</span>
 				<svg
@@ -205,4 +196,4 @@
 	</div>
 {/if}
 
-<div bind:this={element} />
+<EditorContent editor={$editor} />

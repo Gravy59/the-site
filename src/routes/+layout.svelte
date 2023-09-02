@@ -10,7 +10,7 @@
 		class="container mx-auto flex items-center justify-between gap-x-6 px-4 lg:max-w-6xl"
 	>
 		<a href="/" class="text-xl font-bold italic text-zinc-600">The Site</a>
-		<ul class="flex items-center gap-x-1.5">
+		<ul class="-mr-2 flex items-center gap-x-1.5">
 			<li>
 				<a href="/" class="rounded-md px-2 py-1 font-semibold hover:bg-zinc-800 hover:text-white"
 					>Home</a
@@ -58,7 +58,7 @@
 </footer>
 
 <div
-	class="fixed bottom-1 left-1 z-50 flex h-6 w-6 items-center justify-center rounded-full bg-gray-800 p-3 font-mono text-xs text-white"
+	class="text-xs fixed bottom-1 left-1 z-50 flex h-6 w-6 items-center justify-center rounded-full bg-gray-800 p-3 font-mono text-white"
 >
 	<div class="block sm:hidden">xs</div>
 	<div class="hidden sm:block md:hidden">sm</div>

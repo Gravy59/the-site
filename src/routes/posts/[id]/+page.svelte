@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { heading } from '$lib/headings';
 	import type { PageData } from './$types';
-	import SvelteMarkdown from 'svelte-markdown';
 	export let data: PageData;
 </script>
 
-<article class="leading-base container mx-auto px-4 text-base lg:max-w-6xl">
+<article class="container mx-auto px-4 text-base leading-base lg:max-w-6xl">
 	<h1 class={heading({ tight: true, size: 1 })}>{data.article.title}</h1>
-	<p class="leading-base mb-5 flex items-center gap-x-2 text-lg md:text-xl">
+	<p class="mb-5 flex items-center gap-x-2 text-lg leading-base md:text-xl">
 		<svg xmlns="http://www.w3.org/2000/svg" width="0.84em" height="1em" viewBox="0 0 1280 1536"
 			><path
 				fill="currentColor"
@@ -42,6 +41,7 @@
 				{data.article.lead}
 			</p>
 		{/if}
-		<SvelteMarkdown source={data.article.body} />
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		{@html data.article.body}
 	</div>
 </article>
