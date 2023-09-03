@@ -16,6 +16,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	return {
 		userId: session.user.userId,
 		username: session.user.username,
+		display_name: session.user.display_name,
 		posts
 	};
 };

@@ -28,7 +28,7 @@
 	});
 </script>
 
-<section class="container mx-auto px-4 lg:max-w-6xl">
+<section class="container">
 	<h1 class={heading({ tight: true, size: 'display' })}>Create Post</h1>
 	<form
 		use:enhance={({ formData }) => {

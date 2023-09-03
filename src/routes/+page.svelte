@@ -6,7 +6,7 @@
 
 {#if $page.data.session}
 	<section class="mb-8 bg-zinc-100 py-8 text-zinc-800 md:py-12">
-		<div class="container mx-auto px-4 lg:max-w-6xl">
+		<div class="container">
 			<h1 class={heading({ tight: true, size: 1 })}>Another day, another dollar</h1>
 			<!-- <p class="mb-2.5 text-xl">
 				<span class="font-bold italic">The Site</span> is a new hub for your contributions to the Empire,
@@ -16,7 +16,7 @@
 	</section>
 {:else}
 	<section class="mb-8 bg-zinc-100 py-8 text-zinc-800 md:py-12">
-		<div class="container mx-auto px-4 lg:max-w-6xl">
+		<div class="container">
 			<h1 class={heading({ tight: true, size: 'display' })}>The Creative Platform for Citizens</h1>
 			<p class="mb-2.5 text-xl">
 				<span class="font-bold italic">The Site</span> is a new hub for your contributions to the Empire,
@@ -24,7 +24,7 @@
 			</p>
 		</div>
 	</section>
-	<section class="container mx-auto mb-20 px-4 lg:max-w-6xl">
+	<section class="container mb-20 px-4 lg:max-w-6xl">
 		<div class="grid gap-x-4 lg:grid-cols-3">
 			<div>
 				<h2 class={heading({ size: 2 })}>Centralize Everything</h2>
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="container mx-auto mb-20 px-4 lg:max-w-6xl">
+	<section class="container mb-20 px-4 lg:max-w-6xl">
 		<h1 class={heading({ tight: true, size: 1, class: 'leading-base lg:text-center' })}>
 			Trusted by the world&rsquo;s most innovative teams
 		</h1>
@@ -107,29 +107,29 @@
 			</a>
 		</div>
 	</section>
-	<section class="container mx-auto mb-20 px-4 lg:max-w-6xl">
+	<section class="container mb-20 px-4 lg:max-w-6xl">
 		<div class="mx-auto max-w-7xl px-6 lg:px-8">
 			<dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
 				<div class="mx-auto flex max-w-xs flex-col gap-y-4">
-					<dt class="leading-base text-base text-zinc-600">Lives ruined</dt>
+					<dt class="text-base leading-base text-zinc-600">Lives ruined</dt>
 					<dd
-						class="leading-base order-first text-3xl font-semibold tracking-tight text-zinc-900 sm:text-5xl"
+						class="order-first text-3xl font-semibold leading-base tracking-tight text-zinc-900 sm:text-5xl"
 					>
 						4 Billion+
 					</dd>
 				</div>
 				<div class="mx-auto flex max-w-xs flex-col gap-y-4">
-					<dt class="leading-base text-base text-zinc-600">Assets under holding</dt>
+					<dt class="text-base leading-base text-zinc-600">Assets under holding</dt>
 					<dd
-						class="leading-base order-first text-3xl font-semibold tracking-tight text-zinc-900 sm:text-5xl"
+						class="order-first text-3xl font-semibold leading-base tracking-tight text-zinc-900 sm:text-5xl"
 					>
 						$112 Trillion+
 					</dd>
 				</div>
 				<div class="mx-auto flex max-w-xs flex-col gap-y-4">
-					<dt class="leading-base text-base text-zinc-600">New subjects annually</dt>
+					<dt class="text-base leading-base text-zinc-600">New subjects annually</dt>
 					<dd
-						class="leading-base order-first text-3xl font-semibold tracking-tight text-zinc-900 sm:text-5xl"
+						class="order-first text-3xl font-semibold leading-base tracking-tight text-zinc-900 sm:text-5xl"
 					>
 						12,000
 					</dd>
@@ -138,7 +138,7 @@
 		</div>
 	</section>
 	<section class="mb-8 bg-zinc-100 py-8 text-zinc-800 md:py-12">
-		<div class="container mx-auto px-4 lg:max-w-6xl">
+		<div class="container">
 			<h1 class={heading({ tight: true, size: 'display' })}>
 				Boost your productivity.
 				<br />

@@ -8,7 +8,7 @@
 	export let form: ActionData;
 </script>
 
-<div class="container mx-auto px-4 lg:max-w-6xl">
+<div class="container">
 	<form use:enhance method="POST" class="mx-auto max-w-xs space-y-2 p-4">
 		{#if form?.message}
 			<p class="text-base font-medium text-red-500">{form.message}</p>

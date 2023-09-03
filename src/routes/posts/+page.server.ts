@@ -12,7 +12,7 @@ export const load: PageServerLoad = () => {
 			author: {
 				select: {
 					id: true,
-					username: true
+					display_name: true
 				}
 			}
 		}

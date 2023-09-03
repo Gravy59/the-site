@@ -7,6 +7,15 @@ const leadingBase = (20 / 14).toFixed(9);
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
+		container: {
+			center: true,
+			padding: '1rem',
+			screens: {
+				md: '46.875rem',
+				lg: '60.625rem',
+				xl: '73.125rem'
+			}
+		},
 		fontSize: {
 			sm: ['0.75rem', { lineHeight: '1rem' }],
 			base: ['0.875rem', { lineHeight: String(leadingBase) }],

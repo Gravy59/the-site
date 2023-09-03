@@ -26,12 +26,12 @@
 	export let form: ActionData;
 </script>
 
-<section class="container mx-auto px-4 lg:max-w-6xl">
+<section class="container">
 	<h1 class="text-4xl font-semibold tracking-tight">
-		Welcome, {$page.data.username}
+		Welcome, {$page.data.display_name}
 	</h1>
 </section>
-<section class="container mx-auto px-4 lg:max-w-6xl">
+<section class="container">
 	<h1 class="text-4xl font-semibold tracking-tight">Posts</h1>
 	{#if $page.data.posts.length > 0}
 		<ul class="mb-5 rounded shadow-sm">
@@ -148,7 +148,7 @@
 		</div>
 	</Transition>
 </div>
-<!-- <section class="container px-4 mx-auto mt-8 lg:max-w-6xl">
+<!-- <section class="container mx-auto mt-8 lg:max-w-6xl">
 	<div
 		class="h-5 overflow-hidden bg-repeat-x rounded shadow-inner bg-gradient-to-b from-zinc-200 to-zinc-100 shadow-black/10"
 	>
