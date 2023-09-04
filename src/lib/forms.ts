@@ -21,3 +21,11 @@ export const label = tv({
 		}
 	}
 });
+
+export const optionSelect = tv({
+	slots: {
+		root: 'relative my-2.5 block text-base',
+		label: 'mb-0 inline-block min-h-[theme(spacing.5)] max-w-full cursor-pointer pl-5 font-normal',
+		check: 'absolute -ml-5 mt-1 leading-none'
+	}
+});

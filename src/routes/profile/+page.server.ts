@@ -3,6 +3,7 @@ import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/db';
 import type { Actions } from './$types';
 import { z } from 'zod';
+import { to } from '$lib/server/to';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth.validate();
@@ -40,15 +41,17 @@ export const actions = {
 			return fail(400, { message: validationResult.error.message });
 		}
 
-		try {
-			await prisma.post.delete({
+		const [err, res] = await to(
+			prisma.post.delete({
 				where: {
 					id: validationResult.data.postId,
 					// Ensure that the author is the one deleting it
 					authorId: session.user.userId
 				}
-			});
-		} catch (error) {
+			})
+		);
+
+		if (err) {
 			return fail(500, { message: 'An unknown error occurred' });
 		}
 	}

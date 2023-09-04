@@ -3,6 +3,7 @@ import type { PageServerLoad, Actions } from './$types';
 import { prisma } from '$lib/db';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
+import { to } from '$lib/server/to';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth.validate();
@@ -32,17 +33,19 @@ export const actions: Actions = {
 			return fail(400, { message: validationResult.error.message });
 		}
 
-		try {
-			await prisma.post.create({
+		const [err, res] = await to(
+			prisma.post.create({
 				data: {
 					title: validationResult.data.title,
 					body: validationResult.data.body,
 					lead: validationResult.data.lead,
 					authorId: session.user.userId
 				}
-			});
-		} catch (e) {
-			if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+			})
+		);
+
+		if (err) {
+			if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
 				return fail(400, { message: 'Title is already taken' });
 			}
 			return fail(500, {
